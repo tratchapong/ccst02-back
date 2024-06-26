@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Teacher {
+  id              Int           @id @default(autoincrement())
+  firstname       String        @db.VarChar(30)
+  t_code          String        @db.VarChar(4) @unique
+  password        String        @db.VarChar(72)
+  email           String?       @db.VarChar(99)
+  homeworks       Homework[]
+}
+
+model Subject {
+  id              Int           @id @default(autoincrement())
+  title           String
+  description     String?
+  homeworks       Homework[]        
+}
+
+model Homework {
+  id            Int           @id @default(autoincrement())
+  question      String        @db.Text
+  imgUrl        String?       @map("img_url")
+  startdate     DateTime      @db.Date
+  duedate       DateTime      @db.Date
+  published     Boolean       @default(false)
+  subject       Subject       @relation( fields: [subject_id], references: [id] )
+  subject_id    Int
+  teacher       Teacher       @relation( fields: [teacher_id], references: [id])
+  teacher_id    Int
+  answers       Answer[]
+}
+
+model Answer {
+  id            Int       @id @default(autoincrement())
+  answer_text   String?   @db.Text
+  score         Float?    @db.Float
+  submitted     Boolean   
+  updatedAt     DateTime  @updatedAt @db.Timestamp(0) @map("updated_at")
+  homework      Homework  @relation(fields: [homework_id], references: [id])
+  homework_id   Int
+  student       Student   @relation(fields: [student_id], references: [id])
+  student_id    Int
+}
+
+model Student {
+  id            Int       @id @default(autoincrement())
+  firstname     String    @db.VarChar(30)
+  s_code        String    @db.VarChar(4) @unique
+  password      String    @db.VarChar(72)
+  email         String?   @db.VarChar(99) 
+  createdAt     DateTime  @default(now()) @db.Timestamp(0) @map("created_at")
+  answers       Answer[] 
+}
+
+
+
+
+
+
