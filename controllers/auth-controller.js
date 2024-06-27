@@ -34,7 +34,7 @@ module.exports.register = tryCatch(async (req, res, next) => {
 module.exports.login = tryCatch(async (req, res, next) => {
 
   const { t_code, s_code,  password } = req.body
-  console.log("s_code =",s_code)
+  // console.log("s_code =",s_code)
   // validation 
   if( (t_code) && (s_code) || ( !t_code && !s_code )) {
     throw customError('use teacher or student code',400)
@@ -66,5 +66,8 @@ module.exports.login = tryCatch(async (req, res, next) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '30d'})
 
   res.json(token)
+})
+
+module.exports.getMe = (req,res,next) => {
+  res.json({user : req.user})
 }
-)

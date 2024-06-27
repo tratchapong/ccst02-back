@@ -14,10 +14,6 @@ app.use(cors())
 app.use(express.json()) 
 
 // service
-app.use('/me', authenticate, (req,res,next) => {
-  console.log(req.user)
-  res.json({userData: req.user})
-} )
 app.use('/auth', authRoute)
 app.use('/homework',authenticate, homeworkRoute)
 
