@@ -1,4 +1,5 @@
 const express = require('express')
+const authenticate = require('../middlewares/authenticate')
 const homeworkRoute = express.Router()
 
 homeworkRoute.post('/', ()=>{})
