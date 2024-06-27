@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const authRoute = require('./routes/auth-route')
 const homeworkRoute = require('./routes/homework-route')
 const notFound = require('./middlewares/not-found')
@@ -9,6 +10,7 @@ const authenticate = require('./middlewares/authenticate')
 
 const app = express()
 
+app.use(cors())
 app.use(express.json()) 
 
 // service

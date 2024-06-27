@@ -28,7 +28,7 @@ module.exports.register = tryCatch(async (req, res, next) => {
 
   await prisma.student.create({data : newStudent})
 
-  res.json({ msg: "Register Successfully" });
+  res.status(201).json({ msg: "Register Successfully" });
 })
 
 module.exports.login = tryCatch(async (req, res, next) => {
