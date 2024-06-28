@@ -1,9 +1,9 @@
 const express = require('express')
-const authenticate = require('../middlewares/authenticate')
+const homeworkController = require('../controllers/homework-controller')
 const homeworkRoute = express.Router()
 
-homeworkRoute.post('/', ()=>{})
-homeworkRoute.get('/', ()=>{})
+homeworkRoute.post('/', homeworkController.createNewHomework)
+homeworkRoute.get('/', homeworkController.getHomeworkByTeacher)
 homeworkRoute.put('/:id', ()=>{})
 homeworkRoute.delete('/:id', ()=>{})
 
