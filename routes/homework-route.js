@@ -4,8 +4,8 @@ const homeworkRoute = express.Router()
 
 homeworkRoute.post('/', homeworkController.createNewHomework)
 homeworkRoute.get('/', homeworkController.getHomeworkByTeacher)
-homeworkRoute.put('/:id', ()=>{})
-homeworkRoute.delete('/:id', ()=>{})
+homeworkRoute.put('/:id', homeworkController.updateHomework)
+homeworkRoute.delete('/:id', homeworkController.deleteHomework)
 
 
 module.exports = homeworkRoute
