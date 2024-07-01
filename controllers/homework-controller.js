@@ -20,8 +20,7 @@ module.exports.createNewHomework = tryCatch( async (req, res) => {
 module.exports.getHomeworkByTeacher = tryCatch( async (req, res) => {
   const homeworks = await prisma.homework.findMany( {
     where : { teacher_id : req.user.id},
-    include : { subject : { select : { title : true}}}
-
+    include : { subject : { select : { title : true }}}
   })
   res.json({ homeworks })
 } )
