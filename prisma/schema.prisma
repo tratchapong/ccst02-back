@@ -61,6 +61,7 @@ model Student {
   s_code        String    @db.VarChar(4) @unique
   password      String    @db.VarChar(72)
   email         String?   @db.VarChar(99) 
+  imgUrl        String?   @db.VarChar(99) @map("img_url")
   createdAt     DateTime  @default(now()) @db.Timestamp(0) @map("created_at")
   answers       Answer[] 
 }
